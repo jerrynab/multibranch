@@ -14,7 +14,7 @@ pipeline {
             stages {
                 stage('Trigger Second Jenkinsfile') {
                     steps {
-                        build job: "../javawebproject.git", wait: true, parameters: [[$class: 'StringParameterValue', name: 'VM_Name', value: "${VM_Name}", description: 'develop-stack']];
+                        build job: "../javawebproject/master", wait: true, parameters: [[$class: 'StringParameterValue', name: 'VM_Name', value: "${VM_Name}", description: 'develop-stack']];
                         //[string(name: 'VM_Name', value:  String.valueOf(VM_Name))]
                         //echo "build job: DG11-InfraOps/OTE/app-2nd-proj"
                         
