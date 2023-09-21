@@ -34,7 +34,7 @@ pipeline {@Library('globalvarhelper')
     environment {         ACTIVITY_ID = '1234!'     }
             stages {
                 stage('Example') {             steps {  
-                    createGlobalEnvironmentVariables("activityID", "121212154")
+                    createGlobalEnvironmentVariables("activityID1", "121212154")
                                              }
                          }
         
