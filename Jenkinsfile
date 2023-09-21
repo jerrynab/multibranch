@@ -6,7 +6,7 @@ pipeline {
     environment {         ACTIVITY_ID = '1234!'     }
             stages {
                 stage('Example') {             steps {                 script {                     // Set the global environment variable                   
-            env.activityID = 'my-value1'                   
+            env.activityID = '5678910'                   
             echo "Set activityID to ${env.activityID}"                 }           
                                              }
                          }
