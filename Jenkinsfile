@@ -7,10 +7,13 @@ pipeline {
         stage('Trigger Second Jenkinsfile') {
             steps {
                 script {
-                    def childJob = build(job: '../javawebproject/master', parameters: [
-                        string(name: 'ACTIVITY_ID', value: "${ACTIVITY_ID}")
-                    ])
-                    currentBuild.result = childJob.result
+                    def childJob = build(job: '../javawebproject/master')
+                    childJob = childJob.waitForCompletion()
+                    if (childJob.resultIsBetterOrEqualTo(Result.SUCCESS)) {
+                        currentBuild.result = 'SUCCESS'
+                    } else {
+                        currentBuild.result = 'FAILURE'
+                    }
                 }
             }
         }
