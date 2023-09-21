@@ -4,7 +4,7 @@ pipeline {
         #parameters {
          #   string(defaultValue: "123", description: 'This is an activityID', name: 'activityID')
           #  }
-    environment {         ACTIVITY_ID = '2023_Patch_WU'    }
+    environment {         activityID = '2023_Patch_WU'    }
             stages {
                
         stage('Use activityID in Job') {           
