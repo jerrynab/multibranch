@@ -1,20 +1,18 @@
 pipeline {
-    agent any
-    environment {
-        ACTIVITY_ID = '1234!'
-    }
-    stages {
-        stage('Trigger Second Jenkinsfile') {
-            steps {
-                script {
-                    def childPipelineScript = readFileFromWorkspace('../javawebproject/master/Jenkinsfile')
-                    
-                    // Replace ACTIVITY_ID_PLACEHOLDER with the actual value
-                    childPipelineScript = childPipelineScript.replace("ACTIVITY_ID_PLACEHOLDER", "${ACTIVITY_ID}")
-                    
-                    def childJob = load(childPipelineScript)
-                    if (childJob.resultIsBetterOrEqualTo(hudson.model.Result.SUCCESS)) {
-                        currentBuild.result = 'SUCCESS'
-                    } else
-
+    agent any 
+        #parameters {
+         #   string(defaultValue: "123", description: 'This is an activityID', name: 'activityID')
+          #  }
+    environment {         ACTIVITY_ID = '1234!'     }
+            stages {
+        
+        
+               stage('Trigger Second Jenkinsfile') {
+                    steps {
+                        build job: "../javawebproject/master", wait: true, parameters: [string(name: 'activityID', value: "${ACTIVITY_ID}")]
+                        }
+                }
+            }
+  
+}
 
