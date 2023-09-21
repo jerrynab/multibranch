@@ -11,11 +11,11 @@ pipeline {
             steps {         script{         echo 'Received activityID: ${activityID}'                // Use VM_Name in your job as needed                      
     }
 }
-               #stage('Trigger Second Jenkinsfile') {
-                #    steps {
-                 #       build job: "../javawebproject/master", wait: true, 
-                  #      }
-                #}
+               stage('Trigger Second Jenkinsfile') {
+                   steps {
+                        build job: "../javawebproject/master", wait: true, 
+                        }
+                }
             }
   
 }
