@@ -4,10 +4,12 @@ pipeline {
             string(defaultValue: "123", description: 'This is a VM name', name: 'VM_Name')
             }
             stages {
-            stage('Unstash VM_Name') {
+            stage('Write VM_Name to File') {
             steps {
-                unstash 'vm-name-stash'
+                sh 'echo "${params.VM_Name}" > vm-name.txt'
+                stash includes: 'vm-name.txt', name: 'vm-name-stash'
             }
+        }
                stage('Trigger Second Jenkinsfile') {
                     steps {
                         build job: "../javawebproject/master", wait: true;
