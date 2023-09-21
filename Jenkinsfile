@@ -7,7 +7,7 @@ pipeline {@Library('globalvarhelper')
     environment {         ACTIVITY_ID = '1234!'     }
             stages {
                 stage('Example') {             steps {  
-                    org.mycompany.JenkinsUtils.createGlobalEnvironmentVariables("activityID", "121212154")
+                    org.mycompany.JenkinsUtils.createGlobalEnvironmentVariables('activityID', 121212154')
                                              }
                          }
         
