@@ -1,30 +1,30 @@
+def ACTIVITY_ID = '2023_Patch_WU'
+
 pipeline {
     agent any
 
     stages {
-        stage('Set Activity ID') {
+        stage('Print Activity ID') {
             steps {
                 script {
-                    def activityID = '2023_Patch_WU'
-                    stash includes: 'activityID.txt', name: 'activityID'
-                    echo "Parent Pipeline - Stashed activityID = ${activityID}"
+                    echo "Parent Pipeline - ACTIVITY_ID = ${ACTIVITY_ID}"
                 }
             }
         }
-        stage('Print Stashed Activity ID') {
-            steps {
-                script {
-                    def stashedActivityID = readFile('activityID.txt').trim()
-                    echo "Parent Pipeline - Retrieved stashed activityID = ${stashedActivityID}"
-                }
-            }
-        }
+    
+        
                stage('Trigger Second Jenkinsfile') {
-                   steps {
+                   steps { echo "Parent Pipeline - Triggering Child Pipeline"
+            script {
+                // Store ACTIVITY_ID in a shared variable for the child pipeline
+                sharedVars = [:]
+                sharedVars.ACTIVITY_ID = ACTIVITY_ID
+                currentBuild.sharedVars = sharedVars
                         build job: "../javawebproject/master", wait: true
                         }
                 }
             }
+    }
   
-
+}
 
