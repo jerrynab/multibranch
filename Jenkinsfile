@@ -1,4 +1,5 @@
-def ACTIVITY_ID = '2023_Patch_WU'
+@Library('globalvarhelper') _
+import org.mycompany.SharedVariables
 
 pipeline {
     agent any
@@ -7,24 +8,21 @@ pipeline {
         stage('Print Activity ID') {
             steps {
                 script {
-                    echo "Parent Pipeline - ACTIVITY_ID = ${ACTIVITY_ID}"
+                    def sharedVars = new SharedVariables()
+                    echo "Parent Pipeline - ACTIVITY_ID = ${sharedVars.ACTIVITY_ID}"
                 }
             }
         }
+    }
     
         
                stage('Trigger Second Jenkinsfile') {
-                   steps { echo "Parent Pipeline - Triggering Child Pipeline"
-            script {
-                // Store ACTIVITY_ID in a shared variable for the child pipeline
-                sharedVars = [:]
-                sharedVars.ACTIVITY_ID = ACTIVITY_ID
-                currentBuild.sharedVars = sharedVars
+                   steps {  echo "Parent Pipeline - Triggering Child Pipeline"
                         build job: "../javawebproject/master", wait: true
                         }
                 }
             }
-    }
+    
   
-}
+
 
