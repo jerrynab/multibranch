@@ -3,18 +3,13 @@ pipeline {
         parameters {
             string(defaultValue: "123", description: 'This is a VM name', name: 'VM_Name')
             }
+    environment {         MY_VARIABLE = 'Hello, World!'     }
             stages {
-        stage('Create File') {
-            steps {
-                sh 'echo "Hello, World!" > my-file.txt'
-                archiveArtifacts artifacts: 'my-file.txt', allowEmptyArchive: true
-            }
-        }
-        }
+        
+        
                stage('Trigger Second Jenkinsfile') {
                     steps {
-                        build job: "../javawebproject/master", wait: true;
-                        
+                        build job: "../javawebproject/master", wait: true, parameters: [string(name: 'VM_Name', value: "${MY_VARIABLE}")]
                         }
                 }
             }
