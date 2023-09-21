@@ -4,11 +4,12 @@ pipeline {
             string(defaultValue: "123", description: 'This is a VM name', name: 'VM_Name')
             }
             stages {
-            stage('Write VM_Name to File') {
+        stage('Create File') {
             steps {
-                sh 'echo "${params.VM_Name}" > vm-name.txt'
-                stash includes: 'vm-name.txt', name: 'vm-name-stash'
+                sh 'echo "Hello, World!" > my-file.txt'
+                archiveArtifacts artifacts: 'my-file.txt', allowEmptyArchive: true
             }
+        }
         }
                stage('Trigger Second Jenkinsfile') {
                     steps {
@@ -18,4 +19,4 @@ pipeline {
                 }
             }
   
-}
+
