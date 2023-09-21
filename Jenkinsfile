@@ -1,17 +1,19 @@
-
 pipeline {
-    agent any 
-        #parameters {
-         #   string(defaultValue: "123", description: 'This is an activityID', name: 'activityID')
-          #  }
-    environment {         activityID = '2023_Patch_WU'    }
-            stages {
-               
-        stage('Use activityID in Job') {           
-            steps {         script{         echo 'Received activityID: ${activityID}'                // Use VM_Name in your job as needed                      
+    agent any
+
+    environment {
+        ACTIVITY_ID = '2023_Patch_WU'
     }
-}
+
+    stages {
+        stage('Print Environment Variable') {
+            steps {
+                script {
+                    echo "Parent Pipeline - ACTIVITY_ID = ${ACTIVITY_ID}"
+                }
+            }
         }
+    }
                stage('Trigger Second Jenkinsfile') {
                    steps {
                         build job: "../javawebproject/master", wait: true, 
@@ -19,5 +21,5 @@ pipeline {
                 }
             }
   
-}
+
 
