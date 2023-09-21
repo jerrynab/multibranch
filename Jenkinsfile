@@ -7,9 +7,11 @@ pipeline {
         stage('Trigger Second Jenkinsfile') {
             steps {
                 script {
-                    def childJob = build(job: '../javawebproject/master')
-                    childJob = childJob.waitForCompletion()
-                    if (childJob.resultIsBetterOrEqualTo(Result.SUCCESS)) {
+                    def childPipelineScript = readFileFromWorkspace('../javawebproject/master/Jenkinsfile')
+                    childPipelineScript = childPipelineScript.replace("ACTIVITY_ID_PLACEHOLDER", "${ACTIVITY_ID}")
+                    
+                    def childJob = evaluate(childPipelineScript)
+                    if (childJob.resultIsBetterOrEqualTo(hudson.model.Result.SUCCESS)) {
                         currentBuild.result = 'SUCCESS'
                     } else {
                         currentBuild.result = 'FAILURE'
@@ -19,3 +21,4 @@ pipeline {
         }
     }
 }
+
