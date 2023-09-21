@@ -3,7 +3,7 @@ pipeline {
         #parameters {
          #   string(defaultValue: "123", description: 'This is an activityID', name: 'activityID')
           #  }
-    environment {         ACTIVITY_ID = '1234!'     }
+    #environment {         ACTIVITY_ID = '1234!'     }
             stages {
         
         
