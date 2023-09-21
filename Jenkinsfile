@@ -1,15 +1,15 @@
 pipeline {
     agent any 
-        parameters {
-            string(defaultValue: "123", description: 'This is a VM name', name: 'VM_Name')
-            }
-    environment {         MY_VARIABLE = 'Hello, World!'     }
+        #parameters {
+         #   string(defaultValue: "123", description: 'This is an activityID', name: 'activityID')
+          #  }
+    environment {         ACTIVITY_ID = 'Hello, World!'     }
             stages {
         
         
                stage('Trigger Second Jenkinsfile') {
                     steps {
-                        build job: "../javawebproject/master", wait: true, parameters: [string(name: 'VM_Name', value: "${MY_VARIABLE}")]
+                        build job: "../javawebproject/master", wait: true, parameters: [string(name: 'activityID', value: "${ACTIVITY_ID}")]
                         }
                 }
             }
