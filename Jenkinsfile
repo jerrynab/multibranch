@@ -1,4 +1,4 @@
-pipeline {
+pipeline {@Library('globalvarhelper')
     agent any 
         #parameters {
          #   string(defaultValue: "123", description: 'This is an activityID', name: 'activityID')
