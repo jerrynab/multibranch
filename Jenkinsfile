@@ -5,7 +5,11 @@ pipeline {
           #  }
     environment {         ACTIVITY_ID = '1234!'     }
             stages {
-        
+                stage('Example') {             steps {                 script {                     // Set the global environment variable                   
+            env.activityID = 'my-value1'                   
+            echo "Set activityID to ${env.activityID}"                 }           
+                                             }
+                         }
         
                stage('Trigger Second Jenkinsfile') {
                     steps {
