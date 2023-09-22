@@ -18,7 +18,7 @@ pipeline {
         
                stage('Trigger Second Jenkinsfile') {
                    steps {  echo "Parent Pipeline - Triggering Child Pipeline"
-                        build job: "../javawebproject/master", wait: true, parameters [string(name: 'ACTIVITY_ID', value: ACTIVITY_ID)]
+                        build job: "../javawebproject/master", wait: true, parameters [string(name: 'ACTIVITY_ID', value: $(ACTIVITY_ID))]
                         }
                 }
             }
