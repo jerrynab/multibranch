@@ -5,8 +5,8 @@ pipeline {
         stage('Print Activity ID') {
             steps {
                 script {
-                    def activityID = '2023_Patch_WU'
-                    echo "activityID = ${activityID}"
+                    def ACTIVITY_ID = '2023_Patch_WU'
+                    echo "ACTIVITY_ID = ${ACTIVITY_ID}"
                 }
             }
         }
