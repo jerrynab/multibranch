@@ -1,15 +1,19 @@
 pipeline {
     agent any
 
+    environment {
+        ACTIVITY_ID = '2023_Patch_WU'
+    }
+
     stages {
         stage('Print Activity ID') {
             steps {
                 script {
-                    def ACTIVITY_ID = '2023_Patch_WU'
-                    echo "ACTIVITY_ID = ${ACTIVITY_ID}"
+                    echo "activityID = ${ACTIVITY_ID}"
                 }
             }
         }
+    }
     
         
                stage('Trigger Second Jenkinsfile') {
