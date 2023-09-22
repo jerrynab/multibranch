@@ -1,6 +1,3 @@
-@Library('globalvarhelper') _
-import org.mycompany.SharedVariables
-
 pipeline {
     agent any
 
@@ -8,12 +5,11 @@ pipeline {
         stage('Print Activity ID') {
             steps {
                 script {
-                    def sharedVars = new SharedVariables()
-                    echo "Parent Pipeline - ACTIVITY_ID = ${sharedVars.ACTIVITY_ID}"
+                    def activityID = '2023_Patch_WU'
+                    echo "activityID = ${activityID}"
                 }
             }
         }
-    }
     
         
                stage('Trigger Second Jenkinsfile') {
@@ -23,6 +19,6 @@ pipeline {
                 }
             }
     
-  
+}
 
 
